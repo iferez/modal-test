@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Application_macro.css">
+    <link rel="stylesheet" href="css/Application_Macro_Accesos.css">
+    <link rel="stylesheet" href="css/Application_macro_beneficios.css">
+    <link rel="stylesheet" href="css/Application_macro_custom.css">
+    <link rel="stylesheet" href="css/Application_macro_custom_user_styles.css">
+    <link rel="stylesheet" href="css/Application_macro_header.css">
+    <link rel="stylesheet" href="css/Application_macro_operaciones_simples.css">
+    <link rel="stylesheet" href="css/cardsStyleSheet.css">
+    <link rel="stylesheet" href="css/FormPoincenotStyleSheet.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="css/jqueryuicss.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/vendors.css">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700;900&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+        /* Estilo del fondo del modal */
+        .bm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Estilo del modal */
+        .bm-modal_full-img {
+            position: relative;
+            background-image: url("scaloni-mobile.png");
+            background-position: center;
+            background-size: cover;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 312px;
+            height: 460px;
+            max-width: 90%;
+            max-height: 90%;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        /* Bloque de CTA */
+        .bm-modal_full-img .bm-modal_cta {
+            position: absolute;
+            bottom: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+
+        .bm-modal_full-img .bm-modal_cta a {
+            font-family: "Public Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 170px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Estilos CTA */
+        .bm-modal_full-img .btn-navy-main {
+            background-color: #053575;
+            border: 1px solid #053575;
+            color: #fff;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: 0.3s ease;
+        }
+
+        .bm-modal_full-img .btn-navy-main:hover {
+            background-color: #376DB8;
+            color: #fff;
+            border: 1px solid #376DB8;
+            transition: 0.3s ease;
+        }
+
+        .bm-modal_full-img .btn-navy-main:focus-visible {
+            background-color: #053575;
+            color: #fff;
+        }
+
+        .bm-modal_full-img .btn-navy-main:active {
+            background-color: #fff;
+            color: #053575;
+            border: 1px solid #053575;
+        }
+
+        .bm-modal_full-img .btn-navy-main-outline {
+            background-color: #fff;
+            border: 1px solid #fff;
+            color: #053575;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: 0.3s ease;
+        }
+
+        .bm-modal_full-img .btn-navy-main-outline:hover {
+            background-color: #E2EFFD;
+            color: #053575;
+            border: 1px solid #E2EFFD;
+            transition: 0.3s ease;
+        }
+
+        .bm-modal_full-img .btn-navy-main-outline:active {
+            background-color: #fff;
+            color: #053575;
+            border: 1px solid #053575;
+        }
+
+
+        /* Estilo del botón de cierre */
+        .bm-modal_full-img .bm-modal_close-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 30px;
+            height: 30px;
+            font-size: 28px;
+            padding-bottom: 4px;
+            background-color: #fafafa;
+            color: #030303;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        /* Estilo TYC */
+        .bm-modal_full-img .bm-modal_tyc {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width: 90%;
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bm-modal_full-img .bm-modal_tyc a {
+            display: block;
+            font-family: "Public Sans", sans-serif;
+            font-size: 12px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 360px) {
+            .bm-modal_full-img {
+                padding: 12px;
+                max-width: 96%;
+                max-height: 96%;
+            }
+        }
+
+
+        /* Responsive Notebook */
+        @media only screen and (min-width: 992px) {
+            .bm-modal_full-img {
+                background-image: url("scaloni-desk.png");
+                padding: 16px;
+                width: 600px;
+                height: 400px;
+                max-width: 90%;
+                max-height: 90%;
+            }
+
+            .bm-modal_full-img .bm-modal_cta {
+                flex-wrap: nowrap;
+            }
+
+            .bm-modal_full-img .bm-modal_cta a {
+                font-size: 16px;
+            }
+
+            .bm-modal_full-img .bm-modal_close-button {
+                top: 16px;
+                right: 16px;
+                width: 32px;
+                height: 32px;
+                font-size: 34px;
+                padding-bottom: 8px;
+            }
+        }
+
+        /* Responsive Monitor */
+        @media only screen and (min-width: 1440px) {
+            .bm-modal_full-img {
+                background-image: url("scaloni-desk.png");
+                width: 720px;
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contenido del modal -->
+    <div class="bm-modal-overlay">
+        <div class="bm-modal_full-img">
+            <a href="#" data-bs-dismiss="modal" class="bm-modal_close-button">&times;</a>
+
+            <div class="bm-modal_cta">
+                <a href="#" class="btn-navy-main-outline">Botón CTA</a>
+                <a href="#" class="btn-navy-main">Botón CTA 2</a>
+            </div>
+
+            <div class="bm-modal_tyc">
+                <a href="#">* Ver Términos y Condiciones</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,493 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="cs" uri="futuretense_cs/ftcs1_0.tld" %>
+        <%@ taglib prefix="ics" uri="futuretense_cs/ics.tld" %>
+            <%@ taglib prefix="render" uri="futuretense_cs/render.tld" %>
+                <%@ taglib prefix="fragment" uri="futuretense_cs/fragment.tld" %>
+                    <%@ taglib prefix="insite" uri="futuretense_cs/insite.tld" %>
+                        <%@ taglib prefix="assetset" uri="futuretense_cs/assetset.tld" %>
+                            <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+                                <cs:ftcs>
+                                    <%-- Alerta/AlertaModalPrestamosTemplate--%>
+                                        <%-- Record dependencies for the Template --%>
+                                            <ics:if condition='<%=ics.GetVar("tid") != null%>'>
+                                                <ics:then>
+                                                    <render:logdep cid='<%=ics.GetVar("tid")%>' c="Template" />
+                                                </ics:then>
+
+                                            </ics:if>
+                                            <c:choose>
+                                                <c:when test="${fn:length(asset.PaginasAfectadas) > 0}">
+                                                    <c:set var="tipo" value="pagina" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="tipo" value="null" />
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <script>
+                                                function getUrls${ asset.id } (){
+                                                    var modalURLs = [];
+                                                    <c:forEach var="alertaUrl" items="${asset.PaginasAfectadas_link_}" >
+                                                        modalURLs.push("${alertaUrl}");
+                                                    </c:forEach>
+                                                    return modalURLs;
+                                                }
+                                            </script>
+                                            <style>
+                                                @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+
+                                                * {
+                                                    margin: 0;
+                                                    /* padding: 0; */
+                                                    /* esto rompe los bullets que se mencionan en el MP-185 */
+                                                    box-sizing: border-box;
+                                                    font-family: 'Titillium Web', sans-serif;
+                                                }
+
+                                                body {
+                                                    min-height: 100vh;
+                                                    background: #fff;
+                                                    font-size: 'Titillium Web';
+                                                }
+
+                                                #float-message-${asset.id} .prestamos-popup {
+                                                    z-index: 1501;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    position: fixed;
+                                                    top: 0;
+                                                }
+
+                                                #float-message-${asset.id} .popup {
+                                                    position: fixed;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos {
+                                                    position: relative;
+                                                    width: 650px;
+                                                    height: 380px;
+                                                    background-image: url(${urlImageDesktop});
+                                                    background-size: cover;
+                                                    border-radius: 20px;
+                                                    display: inline-flex;
+                                                    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+                                                    grid-template-areas: "content contenedorCajas"
+                                                        "tyc                 tyc";
+                                                    grid-template-columns: 10px 10px;
+                                                    grid-template-rows: 90px 10px;
+                                                    grid-row-gap: 8px;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    flex-wrap: wrap;
+                                                }
+
+                                                /* Grid Area */
+
+                                                #float-message-${asset.id} .contentBoxPrestamos>.content {
+                                                    grid-area: content;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos>.contenedorCajas {
+                                                    grid-area: contenedorCajas;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos>.tyc {
+                                                    grid-area: tyc;
+                                                    margin-top: -109px;
+                                                    color: #fff;
+                                                    margin-left: auto;
+                                                    margin-right: 85px;
+                                                    font-size: 15px;
+                                                }
+
+                                                #float-message-${asset.id} .contenedorCajas {
+                                                    width: 287px;
+                                                    margin: auto;
+                                                }
+
+                                                #float-message-${asset.id} .caja {
+                                                    margin: 4px;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                }
+
+                                                #float-message-${asset.id} .caja img {
+                                                    width: 49px;
+                                                    height: auto;
+                                                    margin-top: 8px;
+                                                }
+
+                                                #float-message-${asset.id} #imgBx>.caja {
+                                                    position: relative;
+                                                    width: 120px;
+                                                    height: 120px;
+                                                    display: inline-flex;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    grid-template-areas: "caja caja"
+                                                        "caja caja";
+                                                    grid-template-columns: 10px 10px;
+                                                    grid-template-rows: 10px 10px;
+                                                    grid-row-gap: 8px;
+                                                }
+
+
+                                                #float-message-${asset.id} #imgBx>.caja {
+                                                    grid-area: caja;
+                                                    background: #fff;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos #imgBx>.caja {
+                                                    background: #fff;
+                                                    border-radius: 23px;
+                                                    font-family: 'Titillium Web';
+                                                }
+
+                                                #float-message-${asset.id} .caja p {
+                                                    font-size: 13px;
+                                                    text-align: center;
+                                                    margin: 0 9px;
+                                                    line-height: 15px;
+                                                    font-weight: bold;
+                                                }
+
+                                                #float-message-${asset.id} .footer {
+                                                    background-color: blue;
+                                                    border-radius: 0 0 1rem 1rem;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content {
+                                                    position: relative;
+                                                    width: 300px;
+                                                    height: 400px;
+                                                    display: flex;
+                                                    /* justify-content: center; */
+                                                    align-items: center;
+                                                    padding: 0 0 0 20px;
+                                                    margin: auto;
+                                                }
+
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content h3 {
+                                                    color: #fff;
+                                                    line-height: 1em;
+                                                    font-weight: 300;
+                                                    font-size: 2em;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content h2 {
+                                                    font-size: 3.6em;
+                                                    color: #fff;
+                                                    line-height: 1em;
+                                                    font-weight: bold;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content h2 span {
+                                                    color: #fff;
+                                                    font-size: 0.6em;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content p {
+                                                    font-weight: 300;
+                                                    color: #fff;
+                                                }
+
+                                                #float-message-${asset.id} .contentBoxPrestamos .content a {
+                                                    display: inline-block;
+                                                    padding: 10px 20px;
+                                                    background: #ff4d54;
+                                                    color: #fff;
+                                                    margin-top: 15px;
+                                                    text-decoration: none;
+                                                    border-radius: 50px;
+                                                }
+
+                                                #float-message-${asset.id} .close {
+                                                    position: absolute;
+                                                    top: 20px;
+                                                    right: 20px;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                    background: #f3f3f3 url(/imagen/close.png);
+                                                    background-repeat: no-repeat;
+                                                    background-size: 10px;
+                                                    background-position: center;
+                                                    cursor: pointer;
+                                                    border-radius: 50%;
+                                                    z-index: 10;
+                                                }
+
+                                                /* now, make it responsive*/
+
+
+                                                /* Version Desktop 1600x1200 */
+
+                                                @media (min-width : 1580px) {
+                                                    #float-message-${asset.id} .contentBoxPrestamos {
+                                                        position: relative;
+                                                        width: 1068px;
+                                                        height: 618px;
+                                                        background-size: cover;
+                                                        border-radius: 20px;
+                                                        display: inline-flex;
+                                                        box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+                                                        grid-template-areas: "content contenedorCajas"
+                                                            "tyc                 tyc";
+                                                        grid-template-columns: 10px 10px;
+                                                        grid-template-rows: 90px 10px;
+                                                        grid-row-gap: 8px;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        flex-wrap: wrap;
+                                                        flex-direction: column;
+                                                        align-content: center;
+                                                    }
+
+                                                    /* Grid Area */
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.content {
+                                                        grid-area: content;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.contenedorCajas {
+                                                        grid-area: contenedorCajas;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.tyc {
+                                                        grid-area: tyc;
+                                                        color: #fff;
+                                                        margin-left: 27px;
+                                                        text-align: center;
+                                                        font-size: 23px;
+                                                        margin-bottom: 40px;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content {
+                                                        width: 560px;
+                                                        height: 400px;
+                                                        padding: 0 0 0 90px;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content h3 {
+                                                        color: #fff;
+                                                        line-height: 1em;
+                                                        font-weight: 300;
+                                                        font-size: 2.4em;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content h2 {
+                                                        font-size: 6em;
+                                                        color: #fff;
+                                                        line-height: 1em;
+                                                        font-weight: bold;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content p {
+                                                        color: #fff;
+                                                        line-height: 1.2em;
+                                                        font-weight: 300;
+                                                        font-size: 2rem;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content a {
+                                                        display: inline-block;
+                                                        padding: 12px 53px;
+                                                        background: #ff4d54;
+                                                        color: #fff;
+                                                        margin-top: 53px;
+                                                        text-decoration: none;
+                                                        border-radius: 50px;
+                                                        font-size: 1.8rem;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content .tyc {
+                                                        font-size: 20px;
+
+                                                    }
+
+                                                    #float-message-${asset.id} .contenedorCajas {
+                                                        width: 525px;
+                                                        margin: auto;
+                                                    }
+
+                                                    #float-message-${asset.id} #imgBx>.caja {
+                                                        position: relative;
+                                                        width: 212px;
+                                                        height: 171px;
+                                                        display: inline-flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        grid-template-areas:
+                                                            "caja caja"
+                                                            "caja caja";
+                                                        grid-template-columns: 10px 10px;
+                                                        grid-template-rows: 10px 10px;
+                                                    }
+
+                                                    #float-message-${asset.id} .caja p {
+                                                        font-size: 1.4em;
+                                                        text-align: center;
+                                                        margin: 0 5px;
+                                                        line-height: 20px;
+                                                        font-weight: bold;
+                                                    }
+
+                                                    #float-message-${asset.id} .caja img {
+                                                        width: 60px;
+                                                        height: auto;
+                                                        margin-bottom: 8px;
+                                                    }
+                                                }
+
+                                                /* Version Mobile */
+
+                                                @media (max-width : 767px) {
+                                                    #float-message-${asset.id} .contentBoxPrestamos {
+                                                        width: 314px;
+                                                        height: 571px;
+                                                        flex-direction: column;
+                                                        position: relative;
+                                                        background-image: url(${urlImageMobile});
+                                                        background-size: cover;
+                                                        border-radius: 20px;
+                                                        display: inline-flex;
+                                                        box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+                                                        grid-template-areas: "content contenedorCajas"
+                                                            "tyc                 tyc";
+                                                        grid-template-columns: 10px 10px;
+                                                        grid-template-rows: 90px 10px;
+                                                        grid-row-gap: 8px;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        flex-wrap: nowrap;
+                                                    }
+
+                                                    /* Grid Area */
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.content {
+                                                        grid-area: content;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.contenedorCajas {
+                                                        grid-area: contenedorCajas;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos>.tyc {
+                                                        grid-area: tyc;
+                                                        margin-bottom: 10px;
+                                                        color: #fff;
+                                                        margin-left: auto;
+                                                        margin-right: 70px;
+                                                    }
+
+                                                    #float-message-${asset.id} .tyc p {
+                                                        padding: 5px;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content {
+                                                        height: 240px;
+                                                        padding-top: 20px;
+                                                        /*      padding-left: 0;*/
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .imgBx img {
+                                                        position: relative;
+                                                        max-width: 285px;
+                                                        margin: auto;
+                                                        padding-top: 37px;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .content p {
+                                                        color: #fff;
+                                                        font-size: 1.2em;
+                                                    }
+
+                                                    /* Css Cajas beneficios*/
+
+                                                    #float-message-${asset.id} .contenedorCajas {
+                                                        width: 261px;
+                                                        padding-bottom: 100px;
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos #imgBx>.caja {
+                                                        background: #fff;
+                                                        border-radius: 20px;
+                                                        font-family: 'Titillium Web';
+                                                    }
+
+                                                    #float-message-${asset.id} .contentBoxPrestamos .imgBx img {
+                                                        position: relative;
+                                                        margin: auto;
+                                                        padding-top: 10px;
+                                                    }
+
+                                                    #float-message-${asset.id} .caja p {
+                                                        font-size: 13px;
+                                                        text-align: center;
+                                                        margin: 0 9px 8px 9px;
+                                                        font-weight: bold;
+                                                    }
+
+                                                    #float-message-${asset.id} .close {
+                                                        top: -50px;
+                                                        right: -10px;
+                                                        background: #fff url(/imagen/close.png);
+                                                        background-repeat: no-repeat;
+                                                        background-size: 10px;
+                                                        background-position: center;
+                                                    }
+                                                }
+                                            </style>
+
+                                            <div id="float-message-${asset.id}" style="display:none;" dataTitle="${asset.dataTitle}" dataCategory="${asset.dataCategory}">
+                                                <div class="prestamos-popup" style="background-color: #575e64ab;">
+                                                    <div class="popup">
+                                                        <div style="background-color: ${asset.BackColor};"
+                                                            class="contentBoxPrestamos">
+                                                            <div class="close"
+                                                                onclick="closeBanner('${asset.id}','${asset.BM_VencimientoCookie}')">
+                                                                <img onload="checkFirstTime('${asset.id}','${tipo}',getUrls${asset.id}())"
+                                                                    style="display:none" src="${urlImageMobile}"
+                                                                    alt="modal cerrar">
+                                                            </div>
+                                                            <div class="content">
+                                                                <div>
+                                                                    <h3 style="color:${asset.ColorTitulo};">
+                                                                        ${asset.Titulo}</h3>
+                                                                    <h2 style="color:${asset.ColorSubtitulo};">
+                                                                        ${asset.Subtitulo}</h2>
+                                                                    <p style="color:${asset.ColorTexto};">${asset.Texto}
+                                                                    </p>
+                                                                    <a class="${asset.ClaseBoton}"
+                                                                        href="${asset.LinkBoton}" onclick="setDataLayer('${asset.id}', 'modal_ingreso')">${asset.TextoBoton}</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="contenedorCajas">
+                                                                <div class="imgBx" id="imgBx">
+                                                                    <c:forEach items="${CajasLista}" var="caja">
+                                                                        <div style="background-color: ${caja.ColorFondo};"
+                                                                            class="caja">
+                                                                            <img src="${caja.imagen}"
+                                                                                alt="logo-beneficio">
+                                                                            <p style="color: ${caja.ColorTexto};">
+                                                                                ${caja.Texto}</p>
+                                                                            <div class="footer"></div>
+                                                                        </div>
+                                                                    </c:forEach>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tyc">
+                                                                <a href="${asset.URL_TyC}" target="_blank"
+                                                                    style="color:${asset.Color_Texto_TyC}">${asset.Texto_TyC}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </cs:ftcs>
